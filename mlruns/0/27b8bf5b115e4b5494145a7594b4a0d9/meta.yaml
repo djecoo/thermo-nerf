@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/27b8bf5b115e4b5494145a7594b4a0d9/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 27b8bf5b115e4b5494145a7594b4a0d9
+run_name: enthused-shrew-665
+run_uuid: 27b8bf5b115e4b5494145a7594b4a0d9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731878306346
+status: 1
+tags: []
+user_id: jcordonn

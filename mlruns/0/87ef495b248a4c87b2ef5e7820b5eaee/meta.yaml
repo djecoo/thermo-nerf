@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/87ef495b248a4c87b2ef5e7820b5eaee/artifacts
+end_time: 1731853428472
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 87ef495b248a4c87b2ef5e7820b5eaee
+run_name: valuable-hen-370
+run_uuid: 87ef495b248a4c87b2ef5e7820b5eaee
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731849854550
+status: 3
+tags: []
+user_id: jcordonn

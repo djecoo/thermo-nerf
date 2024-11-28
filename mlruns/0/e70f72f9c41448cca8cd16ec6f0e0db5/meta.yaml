@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/e70f72f9c41448cca8cd16ec6f0e0db5/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e70f72f9c41448cca8cd16ec6f0e0db5
+run_name: upset-doe-733
+run_uuid: e70f72f9c41448cca8cd16ec6f0e0db5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731879676751
+status: 1
+tags: []
+user_id: jcordonn

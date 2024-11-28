@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/39fa980fde144fb9b162c8f0c50eb58f/artifacts
+end_time: 1731977207753
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 39fa980fde144fb9b162c8f0c50eb58f
+run_name: fortunate-robin-511
+run_uuid: 39fa980fde144fb9b162c8f0c50eb58f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731973273604
+status: 3
+tags: []
+user_id: jcordonn

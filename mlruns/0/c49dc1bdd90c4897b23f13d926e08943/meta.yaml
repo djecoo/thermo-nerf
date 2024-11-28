@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/c49dc1bdd90c4897b23f13d926e08943/artifacts
+end_time: 1731958182878
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c49dc1bdd90c4897b23f13d926e08943
+run_name: loud-dolphin-671
+run_uuid: c49dc1bdd90c4897b23f13d926e08943
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731954720302
+status: 3
+tags: []
+user_id: jcordonn

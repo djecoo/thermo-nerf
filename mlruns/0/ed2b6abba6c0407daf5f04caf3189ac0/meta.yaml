@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/ed2b6abba6c0407daf5f04caf3189ac0/artifacts
+end_time: 1731951235357
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ed2b6abba6c0407daf5f04caf3189ac0
+run_name: indecisive-sheep-959
+run_uuid: ed2b6abba6c0407daf5f04caf3189ac0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731947824783
+status: 3
+tags: []
+user_id: jcordonn

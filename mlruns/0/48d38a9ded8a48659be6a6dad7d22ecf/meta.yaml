@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/48d38a9ded8a48659be6a6dad7d22ecf/artifacts
+end_time: 1731883786633
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 48d38a9ded8a48659be6a6dad7d22ecf
+run_name: kindly-stag-643
+run_uuid: 48d38a9ded8a48659be6a6dad7d22ecf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731880018365
+status: 3
+tags: []
+user_id: jcordonn

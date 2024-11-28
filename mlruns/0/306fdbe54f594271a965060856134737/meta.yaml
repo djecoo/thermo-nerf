@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/306fdbe54f594271a965060856134737/artifacts
+end_time: 1731949554592
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 306fdbe54f594271a965060856134737
+run_name: big-pig-650
+run_uuid: 306fdbe54f594271a965060856134737
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731946080120
+status: 3
+tags: []
+user_id: jcordonn

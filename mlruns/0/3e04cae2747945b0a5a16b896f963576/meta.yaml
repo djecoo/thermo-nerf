@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/3e04cae2747945b0a5a16b896f963576/artifacts
+end_time: 1731959801562
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3e04cae2747945b0a5a16b896f963576
+run_name: skittish-hawk-905
+run_uuid: 3e04cae2747945b0a5a16b896f963576
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731954702226
+status: 3
+tags: []
+user_id: jcordonn

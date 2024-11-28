@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/5d8ddcf268e1497ca6da7a33a1120aef/artifacts
+end_time: 1731967303708
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5d8ddcf268e1497ca6da7a33a1120aef
+run_name: thoughtful-cod-996
+run_uuid: 5d8ddcf268e1497ca6da7a33a1120aef
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731963700705
+status: 3
+tags: []
+user_id: jcordonn

@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/49c4d655f73b4cf5904c20a8dfb7c51f/artifacts
+end_time: 1731853413672
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 49c4d655f73b4cf5904c20a8dfb7c51f
+run_name: melodic-chimp-300
+run_uuid: 49c4d655f73b4cf5904c20a8dfb7c51f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731849854775
+status: 3
+tags: []
+user_id: jcordonn

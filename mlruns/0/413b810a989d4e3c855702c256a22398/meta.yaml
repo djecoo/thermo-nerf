@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/413b810a989d4e3c855702c256a22398/artifacts
+end_time: 1731853224182
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 413b810a989d4e3c855702c256a22398
+run_name: valuable-hound-919
+run_uuid: 413b810a989d4e3c855702c256a22398
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731849857253
+status: 3
+tags: []
+user_id: jcordonn

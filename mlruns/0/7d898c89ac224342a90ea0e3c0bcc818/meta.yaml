@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/7d898c89ac224342a90ea0e3c0bcc818/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7d898c89ac224342a90ea0e3c0bcc818
+run_name: blushing-mule-300
+run_uuid: 7d898c89ac224342a90ea0e3c0bcc818
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731878291578
+status: 1
+tags: []
+user_id: jcordonn

@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from typing import Optional
+import warnings
 
 import numpy as np
 import torch
@@ -98,24 +99,83 @@ class Evaluator:
             ]
 
         return metrics_dict
+    
+    def add_thermal_ref(
+        self, modalities: list[RenderedImageModality], dataset_path: Path
+    ) -> None:
+        """
+        Add the thermal reference to '_evaluation_images'
+        """
+        for modality in modalities:
+            if modality == RenderedImageModality.THERMAL:
+                warning_issued = False
+                eval_img = []
+                for idx, image in enumerate(self._evaluation_images[modality]):
+                    base_filename = f"frame_eval_{idx + 1:05d}"
+                    thermal_format = ["jpeg", "png", "PNG", "JPG"] 
+                    img_eval_thermal = None
+                    for ext in thermal_format:
+                        potential_file = dataset_path / "thermal" / f"{base_filename}.{ext}"
+                        if potential_file.is_file():
+                            img_eval_thermal = potential_file
+                            break
+
+                    if img_eval_thermal is None and not warning_issued:
+                        warnings.warn(
+                        f"No matching image found in {dataset_path / 'thermal'}",
+                        category=UserWarning
+                        )
+                        warning_issued = True
+
+                    elif img_eval_thermal is not None and not warning_issued:
+                        with Image.open(img_eval_thermal) as img:
+                            eval_img.append(np.array(img))
+                
+                eval_img = np.expand_dims(eval_img, axis=-1)
+                eval_img = np.repeat(eval_img, 3, axis=-1)
+                
+                self._evaluation_images[modality] = np.concatenate(
+                    (eval_img, self._evaluation_images[modality]), axis=2
+                    )
+
+                
+
 
     def save_images(
-        self, modalities: list[RenderedImageModality], output_path: Path
+        self, modalities: list[RenderedImageModality], output_path: Path, keep_eval: bool = True, find_thermal_eval: bool =True
     ) -> None:
         """
         Saves evaluation images to `output_path`.
         """
+        # Removes the eval images reference
+        if not keep_eval:
+            new_list = []
+
+            for img in self._evaluation_images[RenderedImageModality.RGB]:
+                split1, split2 = np.split(img, 2, axis=1)
+                new_list.append(split2)
+            self._evaluation_images[RenderedImageModality.RGB] = new_list
+            if find_thermal_eval:
+                new_list = []
+                for img in self._evaluation_images[RenderedImageModality.THERMAL]:
+                    split1, split2 = np.split(img, 2, axis=1)
+                    new_list.append(split2)
+                self._evaluation_images[RenderedImageModality.THERMAL] = new_list
+        
         for modality in modalities:
+            
             for idx, image in enumerate(self._evaluation_images[modality]):
                 if image.shape[-1] == 4:
                     image = image[:, :, 3]
                     Image.fromarray(image).save(
                         output_path / f"{modality.value}_{idx:05d}.jpg"
                     )
+                    
                 else:
                     Image.fromarray(image).save(
                         output_path / f"{modality.value}_{idx:05d}.jpg"
                     )
+                    
 
     def save_metrics(self, output_folder: Path) -> None:
         """

@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/ba8d4650e03a40b99d34ead532b2fdca/artifacts
+end_time: 1731854388392
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ba8d4650e03a40b99d34ead532b2fdca
+run_name: classy-mink-505
+run_uuid: ba8d4650e03a40b99d34ead532b2fdca
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731849857969
+status: 3
+tags: []
+user_id: jcordonn

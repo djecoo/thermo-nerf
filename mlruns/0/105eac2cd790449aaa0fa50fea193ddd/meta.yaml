@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/105eac2cd790449aaa0fa50fea193ddd/artifacts
+end_time: 1731860907348
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 105eac2cd790449aaa0fa50fea193ddd
+run_name: smiling-pig-203
+run_uuid: 105eac2cd790449aaa0fa50fea193ddd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731856321737
+status: 3
+tags: []
+user_id: jcordonn

@@ -25,6 +25,10 @@ class EvalCLIArgs:
         ]
     )
     """Name of the renderer outputs to use: rgb, depth, accumulation."""
+    keep_eval: bool = True
+    """Keep the ref image in the evaluation rendering"""
+    find_thermal_eval: bool = False
+    """Find the thermal reference of the image"""
 
 
 def main() -> None:
@@ -34,12 +38,16 @@ def main() -> None:
     pipeline, config = Renderer.extract_pipeline(
         parameters.model_uri, parameters.dataset_path
     )
-    evaluator = Evaluator(pipeline=pipeline, config=config)
+    evaluator = Evaluator(pipeline=pipeline, config=config, modalities_to_save=parameters.modalities_to_save)
 
     evaluator.save_metrics(output_folder=parameters.output_folder)
+    if RenderedImageModality.THERMAL in parameters.modalities_to_save and parameters.find_thermal_eval:
+        evaluator.add_thermal_ref(modalities=parameters.modalities_to_save, dataset_path=parameters.dataset_path)
     evaluator.save_images(
         modalities=parameters.modalities_to_save,
         output_path=parameters.output_folder,
+        keep_eval=parameters.keep_eval,
+        find_thermal_eval=parameters.find_thermal_eval
     )
 
 

@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/72a17d679b7940e08351256ab69055af/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 72a17d679b7940e08351256ab69055af
+run_name: sassy-moose-257
+run_uuid: 72a17d679b7940e08351256ab69055af
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731877157719
+status: 1
+tags: []
+user_id: jcordonn

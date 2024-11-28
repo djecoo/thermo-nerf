@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/7865d37eca904d3c964d94a0e6c45586/artifacts
+end_time: 1732102255951
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7865d37eca904d3c964d94a0e6c45586
+run_name: trusting-swan-965
+run_uuid: 7865d37eca904d3c964d94a0e6c45586
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1732098542942
+status: 3
+tags: []
+user_id: jcordonn

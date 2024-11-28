@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/1417fa520351470982eda227612eba61/artifacts
+end_time: 1731972168291
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1417fa520351470982eda227612eba61
+run_name: monumental-dog-686
+run_uuid: 1417fa520351470982eda227612eba61
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731968628925
+status: 3
+tags: []
+user_id: jcordonn

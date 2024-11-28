@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/42f00d6a38a9474f9514ee7d7b144c20/artifacts
+end_time: 1731976664181
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 42f00d6a38a9474f9514ee7d7b144c20
+run_name: fortunate-wasp-965
+run_uuid: 42f00d6a38a9474f9514ee7d7b144c20
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731973223197
+status: 3
+tags: []
+user_id: jcordonn

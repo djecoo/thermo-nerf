@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/9de01cfee4eb4076816a12a697049325/artifacts
+end_time: 1727541963363
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9de01cfee4eb4076816a12a697049325
+run_name: clean-fawn-142
+run_uuid: 9de01cfee4eb4076816a12a697049325
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727541931474
+status: 3
+tags: []
+user_id: jcordonn

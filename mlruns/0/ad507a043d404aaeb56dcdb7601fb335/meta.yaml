@@ -1,0 +1,15 @@
+artifact_uri: file:///home/jcordonn/thermo-nerf/mlruns/0/ad507a043d404aaeb56dcdb7601fb335/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ad507a043d404aaeb56dcdb7601fb335
+run_name: nebulous-ox-196
+run_uuid: ad507a043d404aaeb56dcdb7601fb335
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731878286714
+status: 1
+tags: []
+user_id: jcordonn
