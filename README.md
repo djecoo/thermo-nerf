@@ -2,11 +2,11 @@
 Extract the data from https://drive.google.com/file/d/1C6wRYyCbAOEPDV1gWCOBawxEyVLEqlhx/view?usp=sharing
 Run the scripts for the sliding windows using `python .\script\dust3r_sliding_window.py`. 
 
-dust3r_sliding_window.py : Run a sliding window on dust3r poses and output the transforms.json in results
+`dust3r_sliding_window.py` : Run a sliding window on dust3r poses and output the transforms.json in results
 
-optimized_single.py : export a single set of 30 poses optimized by instantsplat to a transfom.json in results
+`optimized_single.py` : export a single set of 30 poses optimized by instantsplat to a transfom.json in results
 
-optimized_sliding_window.py : Run a sliding window on poses optimized by instantsplat and export it to a transforms.json in results
+`optimized_sliding_window.py`: Run a sliding window on poses optimized by instantsplat and export it to a transforms.json in results
 
 -> used scale = 1 in every script
 
