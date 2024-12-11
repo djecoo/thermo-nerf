@@ -1,5 +1,6 @@
 /.venv
 /outputs
+/data
 **/__pycache__/**
 /env
 /FlirImageExtractor
