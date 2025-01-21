@@ -1,6 +1,5 @@
 ## Useful links
 ThermalScenes: https://drive.google.com/file/d/1DY44JH8I3vS0c8P6whO8cu_QLC3nMzU0/view?usp=sharing
-ThermoScenes: https://zenodo.org/records/10835108?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjhlOWI4MTVmLWZlOGUtNDA0Mi1hMWE1LWM5OWYwODE1MjNkNSIsImRhdGEiOnt9LCJyYW5kb20iOiI3NDUwNzM3ZjAxNTlkZWVjNzI1NWY0MmYyMTQxMzdkMyJ9.3Ga9svyICCtX8FwVOWx0NSCx8AHzjb-aqbO1VRLVfUf_CK6fp7sPz2WopezuH3iPxrTag7ivoG1p56ND1eNpVg
 Supplementary material: https://drive.google.com/file/d/1yp9EXMLNKsoLan_aEH6l3049BfzLbNo1/view?usp=sharing
 
 
