@@ -29,7 +29,7 @@ for SCENE_DIR in ${DATA_ROOT_DIR}/*; do
                             PLY_PATH="${NESTED_DIR}/sparse/0/points3D.ply"
                             TXT_PATH="${NESTED_DIR}/sparse/0/points3D.txt"
                             # Construct and execute the command
-                            CMD_D1="python ply_to_txt.py --ply_file ${PLY_PATH} --txt_file ${TXT_PATH}"
+                            CMD_D1="python script/ply_to_txt.py --ply_file ${PLY_PATH} --txt_file ${TXT_PATH}"
                             echo "Running command: $CMD_D1"
                             eval $CMD_D1
                         fi

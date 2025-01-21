@@ -1,7 +1,8 @@
 #!/bin/bash
 
 GPU_ID=0
-DATA_ROOT_DIR="path to your dust3r project, probably project/dust3r"  # Path to the dust3r folder, pro
+ # Path to the dust3r folder PLEASE USE THE FULL PATH HERE
+DATA_ROOT_DIR="path to your dust3r project, ABSOLUT/PATH/project/dust3r" 
 
 for SCENE_DIR in ${DATA_ROOT_DIR}/*; do
     if [ -d "$SCENE_DIR" ] && [ "$(basename "$SCENE_DIR")" != "ref" ]; then

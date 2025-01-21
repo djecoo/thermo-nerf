@@ -6,17 +6,22 @@ import shutil
 import argparse
 
 def rotate_quaternion(q, R):
-    """
-    Rotate a quaternion q by a rotation matrix R.
-    """
-    R = quaternionic.array.from_rotation_matrix(R).normalized
-    q = quaternionic.array(q).normalized
-    return (R * q).normalized
+    q1 = q
+    R = quaternionic.array.from_rotation_matrix(R)
+    q = quaternionic.array(q1)
+
+    R = R.normalized
+    q = q.normalized
+
+    rotated = R * q
+    rotated = rotated.normalized
+
+    return rotated
 
 def quat_to_homo(q, t):
-    """
-    Transform a quaternion (q) and translation vector (t) into a homogeneous matrix.
-    """
+    """Transform q (a quaternionic array [q0, q1, q2, q3]) and t ([x, y, z]) to
+    a homogeneous matrix.
+    Returns the homogeneous matrix in the form of a list of lists."""
     rotation = q.to_rotation_matrix
     T = np.eye(4)
     T[:3, :3] = rotation
@@ -24,124 +29,135 @@ def quat_to_homo(q, t):
     return T
 
 def ralign(X, Y):
-    """
-    Perform rigid alignment of two sets of points X and Y.
-    Returns rotation matrix (R), scale factor (c), and translation vector (t).
-    This function was taken from https://gist.github.com/CarloNicolini/7118015.
-    """
     m, n = X.shape
-    mx, my = X.mean(1), Y.mean(1)
-    Xc, Yc = X - np.tile(mx, (n, 1)).T, Y - np.tile(my, (n, 1)).T
-    sx, sy = np.mean(np.sum(Xc * Xc, 0)), np.mean(np.sum(Yc * Yc, 0))
+    mx = X.mean(1)
+    my = Y.mean(1)
+    Xc = X - np.tile(mx, (n, 1)).T
+    Yc = Y - np.tile(my, (n, 1)).T
+    sx = np.mean(np.sum(Xc * Xc, 0))
+    sy = np.mean(np.sum(Yc * Yc, 0))
     Sxy = np.dot(Yc, Xc.T) / n
-
-    U, D, V = np.linalg.svd(Sxy, full_matrices=True)
-    V = V.T
+    U, D, V = np.linalg.svd(Sxy, full_matrices=True, compute_uv=True)
+    V = V.T.copy()
+    r = np.ndim(Sxy)
     S = np.eye(m)
 
-    if np.linalg.matrix_rank(Sxy) > m - 1 and np.linalg.det(Sxy) < 0:
-        S[m - 1, m - 1] = -1
+    if r > (m - 1):
+        if np.det(Sxy) < 0:
+            S[m - 1, m - 1] = -1
+        elif r == m - 1:
+            if np.det(U) * np.det(V) < 0:
+                S[m - 1, m - 1] = -1
+        else:
+            R = np.eye(2)
+            c = 1
+            t = np.zeros(2)
+            return R, c, t
 
     R = np.dot(np.dot(U, S), V.T)
     c = np.trace(np.dot(np.diag(D), S)) / sx
     t = my - c * np.dot(R, mx)
     return R, c, t
 
-def main(directory):
-    # Directories and initialization
-    source_directory = directory
-    destination_file = os.path.join(directory, "transforms.json")
+def main():
+    parser = argparse.ArgumentParser(description="Process transforms.json files in a given directory.")
+    parser.add_argument("--directory", required=True, help="Path to the directory containing the transforms.json files.")
+    args = parser.parse_args()
+
+    directory = args.directory
     transforms_list = []
     ref_list = []
 
-    # Collect paths to transform files and reference frames
-    for item in os.listdir(source_directory):
-        item_path = os.path.join(source_directory, item)
-        if item == "ref":
-            ref_list.extend(os.listdir(item_path))
-        else:
-            transforms_list.extend(
-                os.path.join(item_path, subitem, "transforms.json")
-                for subitem in os.listdir(item_path)
-            )
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
 
-    # Initialize for merging transformations
+        if filename != "ref":
+            for subfilename in os.listdir(filepath):
+                subfilepath = os.path.join(filepath, subfilename)
+                transform_path = os.path.join(subfilepath, "transforms.json")
+                transforms_list.append(transform_path)
+        else:
+            for subfilename in os.listdir(filepath):
+                ref_list.append(subfilename)
+
     data_final = None
     ref_full = []
 
-    # Process transforms
-    for transform_path in transforms_list:
-        with open(transform_path, "r") as f:
+    for transform in transforms_list:
+        with open(transform, "r") as f:
             data = json.load(f)
 
-        # Initialize the final data structure and process reference frames
         if data_final is None:
             data_final = data
             for frame in data.get("frames", []):
-                frame_name = os.path.basename(frame["file_path"])
+                frame_name = frame["file_path"].split("/")[-1]
                 if frame_name in ref_list:
                     homo_matrix = np.array(frame["transform_matrix"])
-                    pos = homo_matrix[:3, -1]
-                    rotation_matrix = homo_matrix[:3, :3]
-                    quat_R = quaternionic.array.from_rotation_matrix(rotation_matrix)
-                    ref_full.append({"name": frame_name, "quaternion": quat_R, "position": pos})
+                    pos = np.array(homo_matrix[:3, -1])
 
-            # Extract positions and quaternions of references
+                    rotation_matrix = np.array(homo_matrix[:3, :3])
+                    quat_R = quaternionic.array.from_rotation_matrix(rotation_matrix)
+                    ref_full.append({"name": frame_name, "quaternion": quat_R, 'position': pos})
+
             pos_ref = np.array([item["position"] for item in ref_full]).T
             quat_ref = np.array([item["quaternion"] for item in ref_full])
 
         else:
-            # Temporary storage for current file's frames
-            ref_temp = []
-            train_temp = []
+            ref_full_temporary = []
+            train_full_temporary = []
 
             for frame in data.get("frames", []):
-                frame_name = os.path.basename(frame["file_path"])
-                homo_matrix = np.array(frame["transform_matrix"])
-                pos = homo_matrix[:3, -1]
-                rotation_matrix = homo_matrix[:3, :3]
-                quat_R = quaternionic.array.from_rotation_matrix(rotation_matrix)
-
+                frame_name = frame["file_path"].split("/")[-1]
                 if frame_name in ref_list:
-                    ref_temp.append({"name": frame_name, "quaternion": quat_R, "position": pos})
+                    homo_matrix = np.array(frame["transform_matrix"])
+                    pos = np.array(homo_matrix[:3, -1])
+
+                    rotation_matrix = np.array(homo_matrix[:3, :3])
+                    quat_R = quaternionic.array.from_rotation_matrix(rotation_matrix)
+                    ref_full_temporary.append({"name": frame_name, "quaternion": quat_R, 'position': pos})
+
                 elif "train" in frame["file_path"]:
-                    train_temp.append({"name": frame_name, "quaternion": quat_R, "position": pos})
+                    homo_matrix = np.array(frame["transform_matrix"])
+                    pos = np.array(homo_matrix[:3, -1])
 
-            # Match references to the global order
-            ref_temp_dict = {item["name"]: item for item in ref_temp}
-            ref_temp_ordered = [ref_temp_dict[item["name"]] for item in ref_full]
+                    rotation_matrix = np.array(homo_matrix[:3, :3])
+                    quat_R = quaternionic.array.from_rotation_matrix(rotation_matrix)
+                    train_full_temporary.append({"name": frame_name, "quaternion": quat_R, 'position': pos})
 
-            # Align positions
-            pos_ref_temp = np.array([item["position"] for item in ref_temp_ordered]).T
-            pos_train_temp = np.array([item["position"] for item in train_temp]).T
+            name_to_ref = {item["name"]: item for item in ref_full_temporary}
+            ref_full_temporary = [name_to_ref[item["name"]] for item in ref_full]
 
-            R, c, t = ralign(pos_ref_temp, pos_ref)
-            residuals = np.linalg.norm(c * np.dot(R, pos_ref_temp) + t[:, np.newaxis] - pos_ref, axis=0)
+            pos_ref_temporary = np.array([item["position"] for item in ref_full_temporary]).T
+            quat_ref_temporary = np.array([item["quaternion"] for item in ref_full_temporary])
+            pos_train_temporary = np.array([item["position"] for item in train_full_temporary]).T
+            quat_train_temporary = np.array([item["quaternion"] for item in train_full_temporary])
+
+            R, c, t = ralign(pos_ref_temporary, pos_ref)
+            pos_ref_rotated = c * np.dot(R, pos_ref_temporary) + t[:, np.newaxis]
+
+            residuals = np.linalg.norm(pos_ref_rotated - pos_ref, axis=0)
             worst_indices = np.argsort(residuals)[-2:]
 
-            # Filter out outliers and re-align
-            pos_ref_temp_filtered = np.delete(pos_ref_temp, worst_indices, axis=1)
+            pos_ref_temporary_filtered = np.delete(pos_ref_temporary, worst_indices, axis=1)
             pos_ref_filtered = np.delete(pos_ref, worst_indices, axis=1)
-            R, c, t = ralign(pos_ref_temp_filtered, pos_ref_filtered)
 
-            # Rotate training positions and quaternions
-            pos_train_rotated = (c * np.dot(R, pos_train_temp) + t[:, np.newaxis]).T
-            quat_train_rotated = [rotate_quaternion(q, R) for q in np.array([item["quaternion"] for item in train_temp])]
+            R, c, t = ralign(pos_ref_temporary_filtered, pos_ref_filtered)
 
-            # Update data frames
-            for quat, pos, frame in zip(quat_train_rotated, pos_train_rotated, train_temp):
-                frame["transform_matrix"] = quat_to_homo(quat, pos).tolist()
-                data_final["frames"].append(frame)
+            pos_train_rotated = c * np.dot(R, pos_train_temporary) + t[:, np.newaxis]
+            pos_train_rotated = pos_train_rotated.T
 
-    # Save the final transforms file
+            quat_train_rotated = []
+            for quaternion in quat_train_temporary:
+                quat_train_rotated.append(rotate_quaternion(quaternion, R))
+
+            for quat, pos in zip(quat_train_rotated, pos_train_rotated):
+                homogenous = quat_to_homo(quat, pos)
+                new_frame = frame
+                new_frame["transform_matrix"] = homogenous.tolist()
+                data_final["frames"].append(new_frame)
+
     with open("transforms.json", "w") as f:
         json.dump(data_final, f, indent=4)
 
-    # Copy the result to the destination
-    shutil.copy("transforms.json", destination_file)
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Process transform files.")
-    parser.add_argument("--directory", type=str, required=True, help="Source directory containing transform files") 
-    args = parser.parse_args()
-    main(args.directory)
+    main()
