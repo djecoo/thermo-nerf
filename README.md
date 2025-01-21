@@ -19,14 +19,21 @@ After that you can run `bash scripts/colmap2nerf.sh` in order to create the tran
 
 Finally you can run for each scene `python scripts/sliding_window.py --directory directory_to_the_scene (eg /project/dust3r/trees)`. You can also use sliding_window_outliers.py instead to have the outlier rejection layer. 
 
-## Contribute
+
+Congratulations, you have now your transforms.json that you can use to train and evaluate on any Nerfstudio model! Please refer to the ThermoNerf repo to train and evaluate your dataset on it.
+
+
+
+
+
+## Contribute (to ThermoNerf)
 
 We welcome contributions! Feel free to fork and submit PRs.
 
 We format code using [ruff](https://docs.astral.sh/ruff) and follow PEP8.
 The code needs to be type annotated and following our documentation style.
 
-## How to cite
+## How to cite (ThermoNerf)
 
 For now the paper is on arxiv:
 
