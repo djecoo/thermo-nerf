@@ -1,9 +1,16 @@
+## Useful links
+ThermalScenes: https://drive.google.com/file/d/1DY44JH8I3vS0c8P6whO8cu_QLC3nMzU0/view?usp=sharing
+ThermoScenes: https://zenodo.org/records/10835108?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjhlOWI4MTVmLWZlOGUtNDA0Mi1hMWE1LWM5OWYwODE1MjNkNSIsImRhdGEiOnt9LCJyYW5kb20iOiI3NDUwNzM3ZjAxNTlkZWVjNzI1NWY0MmYyMTQxMzdkMyJ9.3Ga9svyICCtX8FwVOWx0NSCx8AHzjb-aqbO1VRLVfUf_CK6fp7sPz2WopezuH3iPxrTag7ivoG1p56ND1eNpVg
+Supplementary material: https://drive.google.com/file/d/1yp9EXMLNKsoLan_aEH6l3049BfzLbNo1/view?usp=sharing
+
+
+
 ## Installation
 Please follow the installation instruction from nerfstudio (https://docs.nerf.studio/quickstart/installation.html, install colmap extension aswell) and InstantSplat (https://github.com/NVlabs/InstantSplat, please download the mast3r model accordingly). 
 
 It is recommended to use separated conda environment for nerfstudio and InstantSplat. 
 
-Upload your dataset within this folder, it should follow the same structure as ThermoScenes (image and thermal folders with train and eval images) and be named "ThermoScenes". Feel free to add more scenes, for example from ThermalScenes: https://drive.google.com/file/d/1DY44JH8I3vS0c8P6whO8cu_QLC3nMzU0/view?usp=sharing
+Upload your dataset within this folder, it should follow the same structure as ThermoScenes (image and thermal folders with train and eval images) and be named "ThermoScenes". Feel free to add more scenes, for example from ThermalScenes.
 
 ## Rune the sliding window
 
