@@ -1,5 +1,5 @@
 ## Installation
-Please follow the installation instruction from nerfstudio (https://docs.nerf.studio/quickstart/installation.html, install colmap extension aswell) and InstantSplat (https://github.com/NVlabs/InstantSplat, please download the mast3r model accodringly to the instructions). 
+Please follow the installation instruction from nerfstudio (https://docs.nerf.studio/quickstart/installation.html, install colmap extension aswell) and InstantSplat (https://github.com/NVlabs/InstantSplat, please download the mast3r model accordingly). 
 
 It is recommended to use separated conda environment for nerfstudio and InstantSplat. 
 
