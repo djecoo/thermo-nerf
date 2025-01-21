@@ -19,7 +19,7 @@ Then run `bash scripts/dust3r_convert.sh` and `bash scripts/txt_to_bin.sh` in or
 Activate your nerfstudio environment. \
 After that you can run `bash scripts/colmap2nerf.sh` in order to create the transforms.json for each subscene. Add the thermal images to it by running `python scripts/update_transforms.sh`
 
-Finally you can run for each scene `python scripts/sliding_window.py --directory directory_to_the_scene (eg /project/dust3r/trees)`. You can also use sliding_window_outliers.py instead to have the outlier rejection layer. 
+Finally you can run for each scene `python scripts/sliding_window.py --directory directory_to_the_scene (eg /project/dust3r/trees)`. You can also use `sliding_window_outliers.py` instead to have the outlier rejection layer. 
 
 
 Congratulations, you have now your transforms.json that you can use to train and evaluate on any Nerfstudio model! Please refer to the ThermoNerf repo to train and evaluate your dataset on it.
