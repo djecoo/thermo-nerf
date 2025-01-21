@@ -1,14 +1,23 @@
-## Rune the files
-Extract the data from https://drive.google.com/file/d/1C6wRYyCbAOEPDV1gWCOBawxEyVLEqlhx/view?usp=sharing
-Run the scripts for the sliding windows using `python .\script\dust3r_sliding_window.py`. 
+## Installation
+Please follow the installation instruction from nerfstudio (https://docs.nerf.studio/quickstart/installation.html, install colmap extension aswell) and InstantSplat (https://github.com/NVlabs/InstantSplat, please download the mast3r model accodringly to the instructions). 
 
-`dust3r_sliding_window.py` : Run a sliding window on dust3r poses and output the transforms.json in results
+It is recommended to use separated conda environment for nerfstudio and InstantSplat. 
 
-`optimized_single.py` : export a single set of 30 poses optimized by instantsplat to a transfom.json in results
+To install the requirements for this project, please run `pip install -e requirements.txt`
 
-`optimized_sliding_window.py`: Run a sliding window on poses optimized by instantsplat and export it to a transforms.json in results
+Upload your dataset within this folder, it should follow the same structure as ThermoScenes (image and thermal folders with train and eval images) and be named "ThermoScenes". Feel free to add more scenes, for example from ThermalScenes: https://drive.google.com/file/d/1DY44JH8I3vS0c8P6whO8cu_QLC3nMzU0/view?usp=sharing
 
--> used scale = 1 in every script
+## Rune the sliding window
+
+First create your project by creating and populating different sub-scenes by running `python scripts/template_start.py`
+
+Then run the mast3r pose estimation using ´bash scripts/run_dust3r.sh`. Dont forget to update the path at the beginning of the folder.
+
+Then run `bash scripts/dust3r_convert.sh´ and ´bash scripts/txt_to_bin.sh´ in order to convert the ply and txt files.  Don't forget to update the path at the beginning of the folder aswell.
+
+After that you can run `bash scripts/colmap2nerf.sh´ in order to create the transforms.json for each subscene. Add the thermal images to it by running `python scripts/update_transforms.sh`
+
+Finally you can run for each scene `python scripts/sliding_window.py --directory directory_to_the scene (eg /project/dust3r/trees)`. You can also use sliding_window_outliers.py instead to have the outlier rejection layer. 
 
 ## Contribute
 
