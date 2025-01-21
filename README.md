@@ -3,23 +3,27 @@ Please follow the installation instruction from nerfstudio (https://docs.nerf.st
 
 It is recommended to use separated conda environment for nerfstudio and InstantSplat. 
 
-To install the requirements for this project, please run `pip install -e requirements.txt`
-
 Upload your dataset within this folder, it should follow the same structure as ThermoScenes (image and thermal folders with train and eval images) and be named "ThermoScenes". Feel free to add more scenes, for example from ThermalScenes: https://drive.google.com/file/d/1DY44JH8I3vS0c8P6whO8cu_QLC3nMzU0/view?usp=sharing
 
 ## Rune the sliding window
 
-First create your project by creating and populating different sub-scenes by running `python scripts/template_start.py`
+First create your project by creating and populating different sub-scenes by running 
+
+```bash
+python script/template_start.py
+```
 
 Activate your instantsplat/mast3r environment. \
 Then run the mast3r pose estimation using `bash scripts/run_dust3r.sh`. Dont forget to update the path at the beginning of the folder.
 
-Then run `bash scripts/dust3r_convert.sh` and `bash scripts/txt_to_bin.sh` in order to convert the ply and txt files.  Don't forget to update the path at the beginning of the folder aswell.
+Then run `bash script/dust3r_convert.sh`, activate your nerfstudio environment then execute `bash script/txt_to_bin.sh` in order to convert the ply and txt files.  Don't forget to update the path at the beginning of the folder aswell.
 
-Activate your nerfstudio environment. \
-After that you can run `bash scripts/colmap2nerf.sh` in order to create the transforms.json for each subscene. Add the thermal images to it by running `python scripts/update_transforms.sh`
+Please activate your nerfstudio environment from now on if that is not yet the case  \
+After that you can run `bash script/colmap2nerf.sh` in order to create the transforms.json for each subscene.\
+Note: You may meet some issue due to the way the ply file has been created. If that is the case, change the line 327 (error = float(elems[7])) to error = 0 in nerfstudio/nerfstudio/data/utils/colmap_parsing_utils.py
+Add the thermal images to it by running `python script/update_transforms.py`
 
-Finally you can run for each scene `python scripts/sliding_window.py --directory directory_to_the_scene (eg /project/dust3r/trees)`. You can also use `sliding_window_outliers.py` instead to have the outlier rejection layer. 
+Finally you can run for each scene `python script/sliding_window.py --directory directory_to_the_scene (eg project/dust3r/trees)`. You can also use `sliding_window_outliers.py` instead to have the outlier rejection layer. It will output the transforms.json file to the current working directory. 
 
 
 Congratulations, you have now your transforms.json that you can use to train and evaluate on any Nerfstudio model! Please refer to the ThermoNerf repo to train and evaluate your dataset on it.
